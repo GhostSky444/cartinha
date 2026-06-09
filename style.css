@@ -1,0 +1,428 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e2e2fc, #ffd6e0);
+    transition: background 2s ease-in-out;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding: 20px 10px;
+    position: relative;
+}
+
+body.success-bg {
+    background: linear-gradient(135deg, #ffeef2, #ffcad6, #ff8da1);
+}
+
+body.modal-blur .wrapper, 
+body.modal-blur #rain-container, 
+body.modal-blur #flower-field {
+    filter: blur(8px);
+    pointer-events: none;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 100vh;
+    gap: 25px;
+    transition: filter 0.5s ease;
+}
+
+/* Chuva Inicial */
+#rain-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 1s ease;
+}
+
+.drop {
+    position: absolute;
+    background: rgba(165, 190, 255, 0.4);
+    width: 2px;
+    height: 15px;
+    animation: fall 1.5s linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-20px); }
+    100% { transform: translateY(100vh); }
+}
+
+/* Pétalas no fundo */
+#flower-field {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.bg-flower {
+    position: absolute;
+    font-size: 14px;
+    opacity: 0.35;
+    animation: floatFlower 6s ease-in-out infinite alternate;
+}
+
+@keyframes floatFlower {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-20px) rotate(20deg); }
+}
+
+/* --- ENVELOPE --- */
+.envelope-wrapper {
+    width: 100%;
+    max-width: 380px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.envelope {
+    position: relative;
+    width: 220px;
+    height: 140px;
+    background: #ffb3c6;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    z-index: 3;
+    transition: transform 0.5s ease;
+}
+
+.envelope .flap {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 110px solid transparent;
+    border-right: 110px solid transparent;
+    border-top: 80px solid #ff85a1;
+    transform-origin: top;
+    transition: transform 0.4s ease 0.2s, z-index 0.2s ease 0.4s;
+    z-index: 5;
+}
+
+.envelope .pocket {
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    border-left: 110px solid #ffcad6;
+    border-right: 110px solid #ffcad6;
+    border-bottom: 70px solid #ffb3c6;
+    border-top: 70px solid transparent;
+    border-radius: 0 0 10px 10px;
+    z-index: 4;
+}
+
+.letter-preview {
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    color: white;
+    z-index: 6;
+}
+
+/* Correção Dinâmica: O texto nunca corta */
+.intro-letter {
+    width: 95%;
+    background: #fff;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    text-align: left;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 1.2s ease, opacity 0.8s ease, margin-top 0.8s ease;
+    z-index: 2;
+}
+
+.intro-letter h3 {
+    font-family: 'Playfair Display', serif;
+    color: #ff4d6d;
+    margin-bottom: 8px;
+}
+
+.intro-letter p {
+    font-family: 'Caveat', cursive;
+    font-size: 1.45rem;
+    color: #332a2b;
+    line-height: 1.4;
+}
+
+.envelope-wrapper.open .envelope .flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope-wrapper.open .intro-letter {
+    max-height: 2000px;
+    opacity: 1;
+    margin-top: 20px;
+    overflow: visible; 
+}
+
+/* --- CARD DOS BOTÕES --- */
+.container {
+    background: rgba(255, 255, 255, 0.93);
+    backdrop-filter: blur(12px);
+    padding: 45px 22px 35px;
+    border-radius: 30px;
+    box-shadow: 0 15px 40px rgba(255, 182, 193, 0.2);
+    text-align: center;
+    max-width: 380px;
+    width: 100%;
+    position: relative;
+    z-index: 5;
+    opacity: 0;
+    display: none;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.container.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.volume-container {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.volume-container input {
+    width: 50px;
+    accent-color: #ff4d6d;
+}
+
+.polaroid {
+    background: white;
+    padding: 12px 12px 25px 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    transform: rotate(-3deg);
+    margin: 0 auto 20px;
+    width: 190px;
+}
+
+.polaroid img {
+    width: 166px;
+    height: 166px;
+    object-fit: cover;
+    border: 1px solid #f2f2f2;
+}
+
+.polaroid-date {
+    font-family: 'Caveat', cursive;
+    font-size: 1.25rem;
+    color: #665c5e;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.tape {
+    position: absolute;
+    top: -15px;
+    left: 30%;
+    width: 80px;
+    height: 25px;
+    background-color: rgba(255, 245, 215, 0.8);
+    transform: rotate(2deg);
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: #ff4d6d;
+    font-size: 2.1rem;
+    margin-bottom: 10px;
+}
+
+#message {
+    font-family: 'Caveat', cursive;
+    color: #4a3f41;
+    font-size: 1.4rem;
+    line-height: 1.3;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #ff758f;
+    font-size: 1.25rem;
+    margin-bottom: 25px;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+
+.btn {
+    padding: 12px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Playfair Display', serif;
+}
+
+.btn-sim {
+    background-color: #47c27e;
+    color: white;
+    z-index: 20;
+    animation: pulsarBrilhar 2.2s infinite ease-in-out;
+}
+
+@keyframes pulsarBrilhar {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.06); box-shadow: 0 0 20px rgba(71, 194, 126, 0.6); }
+    100% { transform: scale(1); }
+}
+
+.btn-sim.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    z-index: 9999;
+    font-size: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: none;
+}
+
+.btn-nao {
+    background-color: #ff4d6d;
+    color: white;
+    z-index: 10;
+}
+
+.btn-nao.absolute {
+    position: fixed;
+    transition: top 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), left 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- OVERLAY DA CARTA DE AMOR FINAL --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255, 182, 193, 0.2); 
+    backdrop-filter: blur(12px); 
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1.5s ease-in-out;
+    padding: 20px;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal-letter {
+    background: #fffdf9;
+    width: 100%;
+    max-width: 440px;
+    max-height: 80vh; 
+    border-radius: 24px;
+    padding: 40px 25px 30px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+    border-left: 6px solid #ff758f;
+    position: relative;
+    overflow-y: auto; /* Permite rolagem infinita do texto longo */
+    transform: scale(0.8) translateY(40px);
+    transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-overlay.show .modal-letter {
+    transform: scale(1) translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    color: #b3a4a7;
+    cursor: pointer;
+    line-height: 1;
+    outline: none;
+}
+
+.close-modal:hover {
+    color: #ff4d6d;
+}
+
+.modal-content h3 {
+    font-family: 'Playfair Display', serif;
+    color: #ff4d6d;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    font-family: 'Caveat', cursive;
+    font-size: 1.6rem;
+    color: #2b2223;
+    line-height: 1.45;
+    white-space: pre-line;
+}
+
+/* Partículas Flutuantes do Final */
+.mix-particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100000;
+    animation: floatUpMix 2.8s linear forwards;
+}
+
+@keyframes floatUpMix {
+    0% { transform: translateY(100vh) translateX(0) scale(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-10vh) translateX(var(--random-x, 0px)) scale(var(--random-scale, 1.4)) rotate(var(--random-deg, 360deg)); opacity: 0; }
+}

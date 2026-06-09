@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Alguém Especial ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Playfair+Display:ital,wght=0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="rain-container"></div>
+    <div id="flower-field"></div>
+
+    <div class="wrapper">
+        
+        <div class="envelope-wrapper" id="envelope-block">
+            <div class="envelope" id="envelope">
+                <div class="flap"></div>
+                <div class="pocket"></div>
+                <div class="letter-preview">Toque para abrir 💌</div>
+            </div>
+            
+            <div class="intro-letter" id="intro-letter">
+                <h3>Oi... ✨</h3>
+                <p>Sei que as coisas ficaram um pouco estranhas e desconfortáveis no nosso encontro. Sei que não saiu exatamente como a gente queria e meu coração ficou super mal depois. Mas o nosso encontro não foi um erro, serviu de lição para mim. Eu sei que você já passou por muita coisa nessa vida e não quero, de jeito nenhum, agilizar as coisas ou te pressionar. Quero ir no teu tempo, te conhecer melhor e aproveitar cada momento. Você é uma mulher incrivelmente linda, e tudo o que eu mais quero é uma oportunidade, uma chance para consertar as coisas e melhorar o que for preciso. Fiz essa página com todo o meu coração para te mostrar uma coisa... dá uma olhada aqui embaixo, por favor?</p>
+            </div>
+        </div>
+
+        <div class="container" id="main-card">
+            <div class="volume-container">
+                <span id="volume-icon">🔊</span>
+                <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.4">
+            </div>
+
+            <div class="polaroid">
+                <div class="tape"></div>
+                <img id="cat-img" src="nossa-foto.jpg" alt="Sua Foto">
+                <div class="polaroid-date" id="polaroid-text">Para a dona do meu sorriso ❤️</div>
+            </div>
+
+            <h1 id="title">Me desculpa... 🥺</h1>
+            <p id="message" style="font-family: 'Caveat', cursive; font-size: 24px; margin: 10px 0; color: #555;">
+                Não fecha os olhos para o que podemos viver juntos, por favor. Eu topo correr todos os riscos se for para estar ao seu lado. Sabia que o meu lugar favorito no mundo é exatamente onde você está?
+            </p>
+
+            <h2 id="question">Você me perdoa?</h2>
+
+            <div class="buttons-container">
+                <button id="btn-sim" class="btn btn-sim">SIM ❤️</button>
+                <button id="btn-nao" class="btn btn-nao">NÃO</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-overlay" id="love-modal">
+        <div class="modal-letter">
+            <button class="close-modal" id="btn-close-modal">×</button>
+            <div class="modal-content">
+                <h3>Minha Promessa Final 💝</h3>
+                
+                <p id="final-letter-text">Você não imagina o tamanho do meu alívio por você estar lendo isso. Estou sendo 100% sincero contigo e abrindo o meu coração: estou morrendo de saudades de você. 
+
+Queria tanto que você pudesse se ver pelos meus olhos, ou estar no meu corpo para sentir exatamente o que eu sinto quando penso em você ou quando estou perto de ti. O seu sorriso e a sua beleza mudam completamente o meu world. Sendo muito sincero, o meu maior sonho é que você seja a minha primeira e última namorada. Eu quero muito que você conheça a minha mãe um dia, ela é um amor de pessoa e tenho certeza absoluta de que ela vai amar te conhecer.
+
+Eu sei que somos diferentes — eu da cidade, você da roça —, mas não vejo nenhum problema nisso. Eu quero aprender sobre as coisas que você gosta, quero entender o seu mundo e, se você me der essa chance, quero muito ir contigo nessa festa que vai ter aí na sua cidade para a gente viver momentos lindos juntos.
+
+Eu levo as minhas promessas e a minha palavra muito a sério. Tudo o que eu te falo não é da boca para fora. Eu não vou parar de falar com você e não vou sumir só porque as coisas não foram perfeitas de primeira. Não sou como os outros que vão embora quando surge uma dificuldade. Sou uma pessoa paciente e não desisto fácil de quem eu amo. 
+
+Não posso e não vou mudar minha forma de te amar. Só queria saber se, depois de tudo, eu ainda tenho uma chance com você... Obrigado por não desistir de nós. ❤️</p>
+
+                <div class="modal-photos-container" style="display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
+                    
+                    <div class="polaroid" style="width: 140px; padding: 10px 10px 20px 10px; background: white; box-shadow: 0px 4px 8px rgba(0,0,0,0.1); border: 1px solid #eee; text-align: center; transform: rotate(-3deg);">
+                        <img src="foto-carta1.jpg" alt="Nossa Foto 1" style="width: 100%; height: 120px; object-fit: cover;">
+                        <div style="font-family: 'Caveat', cursive; font-size: 14px; margin-top: 8px; color: #333;">Momentos... ✨</div>
+                    </div>
+
+                    <div style="font-size: 28px; color: #e63946; text-shadow: 0 0 5px rgba(230,57,70,0.3);">❤️</div>
+
+                    <div class="polaroid" style="width: 140px; padding: 10px 10px 20px 10px; background: white; box-shadow: 0px 4px 8px rgba(0,0,0,0.1); border: 1px solid #eee; text-align: center; transform: rotate(3deg);">
+                        <img src="foto-carta2.jpg" alt="Nossa Foto 2" style="width: 100%; height: 120px; object-fit: cover;">
+                        <div style="font-family: 'Caveat', cursive; font-size: 14px; margin-top: 8px; color: #333;">...Com você 🥰</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <audio id="snd-erro" src="boing.mp3" preload="auto"></audio>
+    <audio id="snd-gato" src="meow.mp3" preload="auto"></audio> 
+    <audio id="snd-musica" src="tantos-sorrisos.mp3" preload="auto" loop></audio>
+    <audio id="snd-musica-feliz" src="seu-sorriso-muda-tudo.mp3" preload="auto" loop></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
